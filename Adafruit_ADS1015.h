@@ -29,7 +29,11 @@
 /*=========================================================================
     I2C ADDRESS/BITS
     -----------------------------------------------------------------------*/
-    #define ADS1015_ADDRESS                 (0x48)    // 1001 000 (ADDR = GND)
+    #define ADS1015_ADDRESS_GND              (0x48)    // 0100 1000 (ADDR = GND)
+    #define ADS1015_ADDRESS_VDD              (0x49)    // 0100 1001 (ADDR = VDD)
+    #define ADS1015_ADDRESS_SDA              (0x4A)    // 0100 1010 (ADDR = SDA)
+    #define ADS1015_ADDRESS_SCL              (0x4B)    // 0100 1011 (ADDR = SCL)
+    #define ADS1015_ADDRESS_DEFAULT          ADS1015_ADDRESS_GND 
 /*=========================================================================*/
 
 /*=========================================================================
@@ -127,7 +131,7 @@ protected:
    adsGain_t m_gain;
 
  public:
-  Adafruit_ADS1015(uint8_t i2cAddress = ADS1015_ADDRESS);
+  Adafruit_ADS1015(uint8_t i2cAddress = ADS1015_ADDRESS_DEFAULT);
   void begin(void);
   uint16_t  readADC_SingleEnded(uint8_t channel);
   int16_t   readADC_Differential_0_1(void);
@@ -144,7 +148,7 @@ protected:
 class Adafruit_ADS1115 : public Adafruit_ADS1015
 {
  public:
-  Adafruit_ADS1115(uint8_t i2cAddress = ADS1015_ADDRESS);
+  Adafruit_ADS1115(uint8_t i2cAddress = ADS1015_ADDRESS_DEFAULT);
 
  private:
 };
